@@ -70,7 +70,7 @@ export async function ItemCard() {
                     <CardContent>
                       <div className='flex items-center w-full h-[50px] mt-6 '>
                            
-                        <Image  className=" ml-0 md:ml-4 w-[30px] h-[30px]" width='100' height='100'  src={`http://db.irowiki.org/image/item/${item.id}.png`} alt="" />
+                        <Image  className=" ml-0 md:ml-4 w-[30px] h-[30px]" width='100' height='100'  src={`http://db.irowiki.org/image/item/${item.id}.png` } key={item.id} alt="" />
 
                         <div className='ml-0 md:ml-4 gap-x-2 w-full flex items-center justify-between ' >
                           <div className='pl-2 md:pl-0 ml-2 md:ml-4 w-[180px]'>
