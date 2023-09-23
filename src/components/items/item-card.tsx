@@ -6,13 +6,13 @@ import { ScrollArea } from "../ui/scroll-area";
 import { useRouter } from "next/navigation";
 
 
-const idInicial = 1200;
-const maxReq = 100;
+const idInicial = 1250;
+const maxReq = 20;
 const pagination = 0;
 
 const translateToPt = require("@kreisler/js-google-translate-free");
 
-const serial = process.env.NEXT_PUBLIC_SERIAL
+const serial = '4f2d4effd149e5789c2a905291d7b651'
 
 const API_URL = `https://www.divine-pride.net/api/database/Item`;
 
