@@ -21,7 +21,7 @@ export function MonsterForm() {
             
               <div className='w-full pt-6'>
                 <Select>
-                      <SelectTrigger className=' w-[300px]'>
+                      <SelectTrigger className=' w-[99%] md:w-[300px]'>
                         <SelectValue placeholder='Escolha o tipo' />
                       </SelectTrigger>
                       <SelectContent className='bg-[#0a0c13]'>
