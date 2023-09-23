@@ -7,12 +7,14 @@ module.exports = {
     images: {
       remotePatterns: [
         {
-          protocol: 'http',
-          hostname: 'db.irowiki.org',
+          protocol: 'https',
+          hostname: ('static.ragnaplace.com'),
           port: '',
-          pathname: '/image/item/**',
+          pathname: ('/bro/item/**'),
         },
+        
       ],
+      
     },
   }
 

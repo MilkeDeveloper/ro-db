@@ -8,9 +8,9 @@ export function ItemForm() {
     return (
         <form action="" className='w-full'>
             <h1 className='font-semibold'>Lista de Itens</h1>
-            <div className='w-full pt-6 flex justify-end gap-4 items-center '>
+            <div className='w-full pt-6 flex justify-center gap-4 items-center '>
               
-              <Input className=' w-full text-sm ' type='text' placeholder='Buscar item' />
+              <Input className='w-full md:w-[280px] text-sm ' type='text' placeholder='Buscar item' />
               <Search className='w-6 h-6' />
               
             </div>
@@ -26,6 +26,7 @@ export function ItemForm() {
                       </SelectTrigger>
                       <SelectContent className='bg-[#0a0c13]'>
                         <SelectItem value='Consumível' >Consumível</SelectItem>
+                        <SelectItem value='Cartas' >Cartas</SelectItem>
                         <SelectItem value='Adagas' >Adagas</SelectItem>
                         <SelectItem value='Arcos' >Arcos</SelectItem>
                         <SelectItem value='Espadas' >Espadas</SelectItem>
