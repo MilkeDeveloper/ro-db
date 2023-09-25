@@ -3,15 +3,16 @@
 import Image from 'next/image'
 import { Separator } from '../ui/separator'
 import { useRouter } from 'next/navigation'
+import { ScrollArea } from '../ui/scroll-area'
 
 export default function Head() {
 
     const router = useRouter()
 
     return (
-        <div>
-            <div className=' top-0 z-10 fixed border-blue-950 bg-[#161822] py-3 w-full flex justify-center items-center'>
-                <Image className='' width='175' height='100' src='/assets/logo3.png' alt='' />
+        <ScrollArea>
+            <div className=' top-0 z-10 fixed border-blue-950 bg-[#161822] py-4 w-full flex justify-center items-center'>
+                <Image className='' width='120' height='100' src='/assets/logo3.png' alt='' />
         </div>
         <div className=' mt-16'>
                 <Image className=' md:h-[250px]' width='1920' height='100' src='/assets/image.jpg' alt='' />
@@ -24,7 +25,7 @@ export default function Head() {
                         
             </div>
         </nav>
-        </div>
+        </ScrollArea>
         
     )
 }

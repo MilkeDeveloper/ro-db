@@ -5,10 +5,11 @@ import Image from 'next/image'
 import { text } from "node:stream/consumers";
 import { ScrollArea } from "../ui/scroll-area";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
-const idInicial = 1250;
-const maxReq = 20;
+const idInicial = 1200;
+const maxReq = 700;
 const pagination = 0;
 
 const translateToPt = require("@kreisler/js-google-translate-free");
@@ -18,7 +19,7 @@ const API_URL = `https://www.divine-pride.net/api/database/monster`;
 
 async function getItemsData(monster_id: number) {
   
-    const res = await fetch(`${API_URL}/${(monster_id)}?apiKey=${serial}`, { cache: 'force-cache' });
+    const res = await fetch(`${API_URL}/${monster_id}?apiKey=${serial}`, { cache: 'force-cache' });
     //ItemList()
     try {
       const data = await res.json();
@@ -80,7 +81,7 @@ export async function MonstersCard(props: MonsterProps ) {
               
                 <Card className='w-full mt-1 py-2 md:py-0' key={monster.id}>
                     <CardContent className=" w-full">
-                      <a onClick={ () => id_route.push(`/monsters/${monster.id}`)}>
+                      <a className="cursor-pointer" onClick={ () => id_route.push(`/monsters/${monster.id}`)}>
                       <div className='flex items-center w-full h-[50px] mt-6 '>
                         
                         <img  className=" ml-0 md:ml-4 w-[50px] h-[50px] " width={100} height={100}  src={`https://static.ragnaplace.com/db/npc/gif/${monster.id}.gif` } alt="Monster Image" />
@@ -106,7 +107,7 @@ export async function MonstersCard(props: MonsterProps ) {
                 
         </div>
            
-      </ScrollArea>        
+      </ScrollArea>  
     )
 }
 

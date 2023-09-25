@@ -19,7 +19,7 @@ const API_URL = `https://www.divine-pride.net/api/database/Item`;
 
 async function getItemsData(item_id: number) {
   
-    const res = await fetch(`${API_URL}/${(item_id)}?apiKey=${serial}`, { next: { revalidate: 86400 } });
+    const res = await fetch(`${API_URL}/${(item_id)}?apiKey=${serial}`, { cache: 'force-cache' });
     //ItemList()
     try {
       if(res) {
