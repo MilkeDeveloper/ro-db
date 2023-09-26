@@ -25,6 +25,7 @@ export function MonsterForm() {
                         <SelectValue placeholder='Escolha o tipo' />
                       </SelectTrigger>
                       <SelectContent className='bg-[#0a0c13]'>
+                      <SelectItem value='Todos' >Todos</SelectItem>
                         <SelectItem value='Normal' >Normal</SelectItem>
                         <SelectItem value='Mini-Boss' >Mini-Boss</SelectItem>
                         <SelectItem value='MVP' >MVP</SelectItem>

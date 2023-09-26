@@ -23,7 +23,7 @@ export default function MonstersScreen() {
                     <div className='w-full h-[530px] flex justify-center'>
 
                         <Suspense fallback={''
-                            }>
+                        }>
 
                             <MonstersCard id={'1500'} name={'lulichan'} />
 
@@ -36,7 +36,9 @@ export default function MonstersScreen() {
                         <Pagination />
                     </section>
                 </div>
+                
             </main>
+            
         </div>
     )
 } 

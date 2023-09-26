@@ -14,7 +14,7 @@ const API_URL = `https://www.divine-pride.net/api/database/monster`;
 
 async function getItemsData(monster_id: number) {
 
-  const res = await fetch(`${API_URL}/${monster_id}?apiKey=${serial}`, { cache: "no-store" });
+  const res = await fetch(`${API_URL}/${monster_id}?apiKey=${serial}`, { next: { revalidate: 3600 } });
   //ItemList()
   try {
     const data = await res.json();

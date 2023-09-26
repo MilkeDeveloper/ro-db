@@ -83,9 +83,10 @@ export async function MonsterCardDetails({ params: { id } }: { params: { id: num
 
     return (
         <article className="w-full h-[100%] bg-[#06070d] flex justify-center items-center">
-            <div className="my-6 w-[90%] lg:w-[60%] flex flex-col items-center h-full bg-[#11131b] rounded-xl py-6">
-                <div className=" ml-6 py-4 w-full items-center flex flex-start">
+            <div className=" animate-fade-right duration-500 ease-in-out my-6 w-[90%] lg:w-[60%] flex flex-col items-center h-full bg-[#11131b] rounded-xl py-6">
+                <div className=" ml-4 mt-0 pb-6 w-[90%] items-center flex flex-start">
                     <BackPage />
+                    
                 </div>
                 <h1 className=" font-bold text-center text-lg">{monster.name}</h1>
                 <Separator className="mt-4 w-[90%]" />

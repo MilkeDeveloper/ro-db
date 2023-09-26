@@ -10,7 +10,7 @@ export function BackPage() {
       <>
         
         <button onClick={() => router.push('/monsters')} className="btn">
-            <ArrowLeft/>
+            <ArrowLeft className="text-cyan-500  "/>
         </button>
       </>
 

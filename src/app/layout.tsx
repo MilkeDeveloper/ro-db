@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Head from '@/components/layout/head'
+import { FooterComponent } from '@/components/footer/footer-component'
 
 
 
@@ -28,9 +29,10 @@ export default function RootLayout({
   return (
     <html lang="pt_BR" className='bg-[#06070d]' >
         
-          <body className={inter.className} >
+          <body className={inter.className } >
               <Head />
               {children}
+              <FooterComponent/>
           </body>
     </html>
   )
