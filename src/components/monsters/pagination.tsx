@@ -3,10 +3,18 @@ import { useMonstersStore } from "@/app/store/monstersStore";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function Pagination() {
-    return (
-        <div className=" w-full flex justify-between">
-            <button onClick={(useMonstersStore.getState().previousPage, useMonstersStore.getState().previousMonsterList) } > <ChevronLeft className="text-cyan-500" /> </button>
-            <button onClick={useMonstersStore.getState().nextMonsterList}> <ChevronRight className="text-cyan-500" /> </button>
-        </div>
-    )
+    const { isLoading, currentPage, previousPage, nextPage, nextMonsterList, previousMonsterList } = useMonstersStore();
+    if(!isLoading)
+    
+        return (
+            <div className={` w-full items-end flex justify-between }`} >
+                <button className={`${currentPage <= 1 ? 'opacity-50' : ''}`} disabled={currentPage <= 1} onClick={ () =>{ previousPage();
+                    {currentPage <= 0  ? '' : previousMonsterList() } } } > 
+                
+                    <ChevronLeft className="text-cyan-500" /> 
+                </button>
+                <span className="text-cyan-500 font-semibold">{useMonstersStore.getState().currentPage}</span>
+                <button  onClick={ () => {nextMonsterList(); nextPage()}}> <ChevronRight className="text-cyan-500" /> </button>
+            </div>
+        )
 }
