@@ -1,16 +1,11 @@
 'use client'
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, useEffect, useState, Suspense } from "react";
+import { useEffect } from "react";
 import { Card, CardContent } from "../ui/card";
 import Image from 'next/image'
-import { text } from "node:stream/consumers";
 import { ScrollArea } from "../ui/scroll-area";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useMonstersStore } from "@/app/store/monstersStore";
 
-
-const idInicial = 1200;
-const maxReq = 700;
-const pagination = 0;
 
 const translateToPt = require("@kreisler/js-google-translate-free");
 const serial = '4f2d4effd149e5789c2a905291d7b651'
@@ -18,36 +13,19 @@ const API_URL = `https://www.divine-pride.net/api/database/monster`;
 
 
 async function getItemsData(monster_id: number) {
-  
-    const res = await fetch(`${API_URL}/${monster_id}?apiKey=${serial}`, { cache: 'force-cache' });
-    //ItemList()
-    try {
-      const data = await res.json();
-        return data;
-    } catch (error) {
-      // Ocorreu um erro ao fazer o parse do JSON (não é JSON válido)
-      return null; // Ou você pode retornar um valor padrão, como um objeto vazio: return {};
-    }
+
+  const res = await fetch(`${API_URL}/${monster_id}?apiKey=${serial}`, { cache: "force-cache" });
+  //ItemList()
+  try {
+    const data = await res.json();
+    return data
+
+  } catch (error) {
+    // Ocorreu um erro ao fazer o parse do JSON (não é JSON válido)
+    return null; // Ou você pode retornar um valor padrão, como um objeto vazio: return {};
+  }
 }
 
-async function fazerRequisicoesSequenciais() {
-    const monsters = []
-  
-    for (let i = 0; i < maxReq; i++) {
-      const monsterID = idInicial + i;
-
-      const monster = await getItemsData(monsterID);
-      
-      
-      if (monster !== null) {
-        monsters.push(monster);
-      }
-    }
-    //console.log('Itens obtidos:', monsters);
-    return monsters
-    
-    
-  }
 
 export interface MonsterProps {
   id: string
@@ -58,57 +36,78 @@ export interface MonsterProps {
 
 }
 
-export async function MonstersCard(props: MonsterProps ) {
-    //const data = await getItemsData(item_id)
-    const id_route = useRouter()
+export async function MonstersCard(props: MonsterProps) {
+  //const data = await getItemsData(item_id)
+  
+  const id_route = useRouter();
+  const { monsters, nextPage, previousPage, pageSize, currentPage, idMonster, isLoading } = useMonstersStore();
+  const startIndex = currentPage * pageSize;
+  const endIndex = startIndex + pageSize;
+  
+  useEffect(() => {
+    const fazerRequisicoesSequenciais = async () => {
+      const monsters = [];
 
-    const monsters = await fazerRequisicoesSequenciais();
+      for (let i = startIndex; i < endIndex; i++) {
+        const monsterID = useMonstersStore.getState().idMonster + i;
+        console.log(monsterID)
+        
+        const monster = await getItemsData(monsterID);
 
-    console.log("array:", 'items')
+        if (monster !== null) {
+          monsters.push(monster);
+          //useMonstersStore.setState({ isLoading: true });
+        }
+        
+      }
+      useMonstersStore.setState({ monsters });
+    };
 
+    fazerRequisicoesSequenciais();
+    useMonstersStore.setState({ isLoading: false });
+  }, [idMonster]);
+
+  //console.log("array:", useMonstersStore.getState().idMonster)
+
+  return (
     
-
-
-    //console.log(data2)
-    //console.log(data_pt)
-
-    return ( 
     <ScrollArea className="w-full mt-6">
-
+      {isLoading ? <p>Carregando...</p>:
       <div className='w-full flex flex-col overflow-x-hidden '>
-          
-            {monsters?.map((monster: MonsterProps) => (
-              
-                <Card className='w-full mt-1 py-2 md:py-0' key={monster.id}>
-                    <CardContent className=" w-full">
-                      <a className="cursor-pointer" onClick={ () => id_route.push(`/monsters/${monster.id}`)}>
-                      <div className='flex items-center w-full h-[50px] mt-6 '>
-                        
-                        <img  className=" ml-0 md:ml-4 w-[50px] h-[50px] " width={100} height={100}  src={`https://static.ragnaplace.com/db/npc/gif/${monster.id}.gif` } alt="Monster Image" />
-                        
-                        <div className='pl-2 md:pl-0 ml-4 md:ml-8 w-[80px] md:w-[300px]'>
-                            <span className=' text-sm text-gray-300 font-semibold capitalize'>{monster.name }</span>
-                            <p className='text-xs text-muted-foreground' > <span className="text-xs font-semibold text-muted-foreground">ID</span> #{monster.id} </p>
-                        </div>
-                        <section className="w-[100px] md:w-[72%] flex justify-end">
-                          <span className=' ml-0 mr-4 md:mr-11 text-xs text-cyan-500 border border-cyan-900 rounded-[8px] p-1'>
-                            Lv.{monster.stats?.level}
-                          </span>
-                        </section>
-                      </div>
-                      </a>
-                    </CardContent>
-                  </Card>
-                ))}
-              
-            <div>
-                
-            </div>
-                
+
+        {useMonstersStore.getState().monsters.map((monster: MonsterProps) => (
+
+          <Card className='w-full mt-1 py-2 md:py-0' key={monster.id}>
+            <CardContent className=" w-full">
+              <a className="cursor-pointer" onClick={() => id_route.push(`/monsters/${monster.id}`)}>
+                <div className='flex items-center w-full h-[50px] mt-6 '>
+
+                  <img className=" ml-0 md:ml-4 w-[50px] h-[50px] " width={100} height={100} src={`https://static.ragnaplace.com/db/npc/gif/${monster.id}.gif`} alt="Monster Image" />
+
+                  <div className='pl-2 md:pl-0 ml-4 md:ml-8 w-[80px] md:w-[300px]'>
+                    <span className=' text-sm text-gray-300 font-semibold capitalize'>{monster.name}</span>
+                    <p className='text-xs text-muted-foreground' > <span className="text-xs font-semibold text-muted-foreground">ID</span> #{monster.id} </p>
+                  </div>
+                  <section className="w-[100px] md:w-[72%] flex justify-end">
+                    <span className=' ml-0 mr-4 md:mr-11 text-xs text-cyan-500 border border-cyan-900 rounded-[8px] p-1'>
+                      Lv.{monster.stats?.level}
+                    </span>
+                  </section>
+                </div>
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+
+        <div>
+
         </div>
-           
-      </ScrollArea>  
-    )
+
+      </div>}
+
+    </ScrollArea>
+    
+  )
 }
 
 
