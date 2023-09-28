@@ -102,7 +102,7 @@ export async function MonstersCard(props: MonsterProps) {
                   <img className=" ml-0 md:ml-4 w-[50px] h-[50px] " width={100} height={100} src={`https://static.ragnaplace.com/db/npc/gif/${monster.monster_id}.gif`} alt="Monster Image" />
 
                   <div className='pl-2 md:pl-0 ml-4 md:ml-8 w-[80px] md:w-[300px]'>
-                    <span className=' text-sm text-gray-300 font-semibold capitalize'>{monster.monster_info}</span>
+                    <span className=' text-sm text-gray-300 font-semibold capitalize'>{monster.monster_info.replace(/_/g, ' ')}</span>
                     <p className='text-xs text-muted-foreground' > <span className="text-xs font-semibold text-muted-foreground">ID</span> #{monster.monster_id} </p>
                   </div>
                   <section className="w-[100px] md:w-[72%] flex justify-end">
