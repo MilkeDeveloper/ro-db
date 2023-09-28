@@ -94,7 +94,7 @@ export async function MonstersCard(props: MonsterProps) {
 
         {monsters.map((monster: MonsterProps) => (
           
-          <Card className=' animate-fade duration-500 ease-in-out touch-none w-full mt-1 py-2 md:py-0' key={monster.monster_id}>
+          <Card className=' animate-fade duration-500 ease-in-out w-full mt-1 py-2 md:py-0' key={monster.monster_id}>
             <CardContent className=" w-full">
               <a className="cursor-pointer" onClick={() => id_route.push(`/monsters/${monster.monster_id}`)}>
                 <div className='flex items-center w-full h-[50px] mt-6 '>
