@@ -16,5 +16,14 @@ module.exports = {
       ],
       
     },
+
+    async rewrites() {
+      return [
+        {
+          source: '/api/:path*',
+          destination: 'https://ragnapi.com/api/v1/re-newal/monsters/:path*'
+        }
+      ]
+    }
   }
 

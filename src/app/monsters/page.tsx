@@ -22,10 +22,13 @@ export default function MonstersScreen() {
                     </div>
                     <div className='w-full h-[530px] flex justify-center'>
 
-                        <Suspense fallback={''
+                        <Suspense fallback={<div className=" flex flex-col gap-6 justify-center items-center h-[490px] ">
+                            <img className=" ml-0 mr-4 md:ml-0 w-[68px] h-[60px] " width={100} height={100} src='https://static.ragnaplace.com/db/npc/gif/1751.gif' alt="Monster Image" />
+                            <p className='text-md text-cyan-500'>Aguarde...</p>
+                        </div>
                         }>
 
-                            <MonstersCard id={'1500'} name={'lulichan'} />
+                            <MonstersCard monster_info={'lulichan'} monster_id="1500" />
 
 
                         </Suspense>
@@ -36,9 +39,9 @@ export default function MonstersScreen() {
                         <Pagination />
                     </section>
                 </div>
-                
+
             </main>
-            
+
         </div>
     )
 } 

@@ -4,6 +4,7 @@ import { create } from 'zustand';
 
 interface MonstersStoreState {
     monsters: MonsterProps[];
+    newMonsters: any[];
     currentPage: number;
     pageSize: number;
     nextPage: () => void;
@@ -13,18 +14,21 @@ interface MonstersStoreState {
     previousMonsterList: () => void;
     isLoading: boolean;
     hideElement: boolean;
+    setMonsters: (monsters: MonsterProps[]) => void;
 }
 
 export const useMonstersStore = create<MonstersStoreState>((set) => ({
     monsters: [],
+    newMonsters: [],
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 15,
     nextPage: () => set((state) => ({ currentPage: state.currentPage + 1 })),
     previousPage: () => set((state) => ({ currentPage: state.currentPage - 1 })),
-    idMonster: 1200,
+    idMonster: 1001,
     nextMonsterList: () => set((state) => ({ idMonster: state.idMonster + state.monsters.length })),
     previousMonsterList: () => set((state) => ({ idMonster: state.idMonster - state.monsters.length })),
     isLoading: false,
     hideElement: false,
+    setMonsters: (monsters) => set({ monsters }),
 }
 ));

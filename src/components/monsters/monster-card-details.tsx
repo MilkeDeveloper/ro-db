@@ -4,13 +4,16 @@ import { Separator } from "../ui/separator"
 import { GetMonsterDetailsData } from "./fecth-data-monster"
 import { useRouter } from "next/navigation"
 import { BackPage } from "./back-component"
+import { useMonstersStore } from "@/app/store/monstersStore"
+import { useEffect } from "react"
 
 export async function MonsterCardDetails({ params: { id } }: { params: { id: number } }) {
+
     const monster = await GetMonsterDetailsData(id)
 
     //const router = useRouter()
 
-    console.log(monster)
+    //console.log(monster)
 
     const race: any = {
         0: 'Amorfo',
@@ -79,7 +82,7 @@ export async function MonsterCardDetails({ params: { id } }: { params: { id: num
     }));
 
     console.log(resultadoMapeado)
-
+    
 
     return (
         <article className="w-full h-[100%] bg-[#06070d] flex justify-center items-center">
@@ -95,7 +98,7 @@ export async function MonsterCardDetails({ params: { id } }: { params: { id: num
                         <div className=" w-full flex flex-col items-center">
                             <section className="ml-8 overflow-hidden bg-[#0a0c13] mt-6 flex flex-col justify-center items-center w-full h-[200px] border border-cyan-500 rounded-xl">
                                 <div className="mt-12 w-[full] flex flex-col items-center">
-                                    <img className=" z-10 relative bottom-0 top-20 left-0 ml-0 md:ml-4 " width={90} height={90} src={`https://static.ragnaplace.com/db/npc/gif/${monster.id}.gif`} alt="Monster Image" />
+                                    <img className=" z-10 relative bottom-0 top-20 left-0 ml-0 md:ml-4 " width={90} height={90} src={`http://db.irowiki.org/image/monster/${monster.id}.png`} alt="Monster Image" />
                                     <img className=" z-0 pt-6 pr-0 " width={200} height={100} src={'/assets/bg-rock.png'} alt="Monster Image" />
                                 </div>
 
@@ -125,9 +128,9 @@ export async function MonsterCardDetails({ params: { id } }: { params: { id: num
                     <ul className="text-sm  ml-6 mt-6 grid grid-cols-2 gap-y-2 gap-x-4">
                         {resultadoMapeado.map((element, index) => (
                             <li key={element.id}> <span className=" font-semibold text-muted-foreground">{element.name}: </span>
-                                {element.value > 100 && <span className="ml-2 text-[#71CA0B]" > {element.value} % </span> ||
-                                    element.value < 100 && <span className="ml-2 text-[#C80539]" > {element.value} % </span> ||
-                                    element.value == 100 && <span className="ml-2 text-slate-300" > {element.value} % </span>}
+                                {element.value > 100 && <span className="ml-1 text-xs font-bold text-[#71CA0B]" > {element.value} % </span> ||
+                                    element.value < 100 && <span className="ml-1 text-xs font-bold text-[#C80539]" > {element.value} % </span> ||
+                                    element.value == 100 && <span className="ml-1 text-xs font-bold text-slate-300" > {element.value} % </span>}
                             </li>
 
                         ))}
