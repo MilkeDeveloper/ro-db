@@ -25,7 +25,7 @@ export async function GetMonstersDataReq(page: number, pageSize: number) {
     const API_URL_TEST = `https://e03e-2804-28c8-513-9700-4c0-9096-b2bb-2cab.ngrok-free.app/api/monsters?page=${page}&pageSize=${pageSize}`
 
     //const res = await fetch(`${API_URL}/${monster_id}/?apiKey=${serial}`, {  cache: 'force-cache' });
-    const res = await fetch(API_URL3, { cache: 'force-cache' });
+    const res = await fetch(API_URL_TEST, { cache: 'force-cache' });
     //ItemList()
     try {
         const data = await res.json();
