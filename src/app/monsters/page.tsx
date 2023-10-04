@@ -28,7 +28,7 @@ export default function MonstersScreen() {
                         </div>
                         }>
 
-                            <MonstersCard monster_info={'lulichan'} monster_id="1500" />
+                            <MonstersCard id="" monster_info={'lulichan'} monster_id="1500" />
 
 
                         </Suspense>

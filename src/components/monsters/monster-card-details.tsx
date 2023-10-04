@@ -98,7 +98,7 @@ export async function MonsterCardDetails({ params: { id } }: { params: { id: num
                         <div className=" w-full flex flex-col items-center">
                             <section className="ml-8 overflow-hidden bg-[#0a0c13] mt-6 flex flex-col justify-center items-center w-full h-[200px] border border-cyan-500 rounded-xl">
                                 <div className="mt-12 w-[full] flex flex-col items-center">
-                                    <img className=" z-10 relative bottom-0 top-20 left-0 ml-0 md:ml-4 " width={90} height={90} src={`http://db.irowiki.org/image/monster/${monster.id}.png`} alt="Monster Image" />
+                                    <img className=" z-10 relative bottom-0 top-20 left-0 ml-0 md:ml-4 " width={90} height={90} src={`https://legacymmo.com.br/data/monsters/${monster.id}.gif`} alt="Monster Image" />
                                     <img className=" z-0 pt-6 pr-0 " width={200} height={100} src={'/assets/bg-rock.png'} alt="Monster Image" />
                                 </div>
 

@@ -14,7 +14,11 @@ export function Pagination() {
                     <ChevronLeft className="text-cyan-500" /> 
                 </button>
                 <span className="text-cyan-500 font-semibold">{useMonstersStore.getState().currentPage}</span>
-                <button  onClick={ () => {nextMonsterList(); nextPage()}}> <ChevronRight className="text-cyan-500" /> </button>
+                <button className={`${currentPage >= 70 ? 'opacity-50' : ''}`} disabled={currentPage >= 70} onClick={ () =>{ nextPage();
+                    {currentPage <= 0  ? '' : nextMonsterList() } } } > 
+                
+                    <ChevronRight className="text-cyan-500" /> 
+                </button>
             </div>
         )
 }

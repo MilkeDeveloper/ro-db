@@ -6,7 +6,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { useRouter } from "next/navigation";
 import { useMonstersStore } from "@/app/store/monstersStore";
 import { GetMonstersDataReq } from "./fecth-data-monster";
-import { GetMonstersDataReq2 } from "./monsterObjectToJson";
+
 
 
 
@@ -16,6 +16,7 @@ const translateToPt = require("@kreisler/js-google-translate-free");
 
 
 export interface MonsterProps {
+  id: string
   monster_id: string
   monster_info: string;
   main_stats?: {
@@ -24,60 +25,34 @@ export interface MonsterProps {
   gif?: string;
 
 }
-
+const monsterList: any = []
 export async function MonstersCard(props: MonsterProps) {
   //const data = await getItemsData(item_id)
-
-  
-  
-  
   
   const id_route = useRouter();
-  const { monsters, nextPage, previousPage, pageSize, currentPage, idMonster, isLoading, setMonsters } = useMonstersStore();
-  const startIndex = 0 * pageSize;
-  const endIndex = startIndex + pageSize;
-  
+  const { pageSize, currentPage, isLoading } = useMonstersStore();
+
   useEffect(() => {
-    
-    const fazerRequisicoesSequenciais = async () => {
-
-      //if(useMonstersStore.getState().monsters.length > 0) {
+    const fetchMonsters = async () => {
       
-        //return useMonstersStore.getState().monsters
+      try {
+        useMonstersStore.setState({ isLoading: true });
+        const data = await GetMonstersDataReq(currentPage, pageSize);
+        monsterList.push(useMonstersStore.setState({ monsters: data }));
         
-      //}
-
-      useMonstersStore.setState({ isLoading: true });
-
-      const monsters = [];
-
-      for (let i = startIndex; i < endIndex; i++) {
-        const monsterID = useMonstersStore.getState().idMonster + i;
-        console.log(monsterID)
-        
-        
-        const monster = await GetMonstersDataReq(monsterID);
-        
-
-        if (monster !== null) {
-          monsters.push(monster);
-          //useMonstersStore.setState({ isLoading: true });
-        }
-        
+        return data
+      } catch (error) {
+        console.error("Error fetching monsters:", error);
+      } finally {
+        useMonstersStore.setState({ isLoading: false });
       }
-      setMonsters(monsters);
-      useMonstersStore.setState({ monsters, isLoading: false });
-      console.log('monstros:', useMonstersStore.getState().monsters)
-      return monsters 
+
       
     };
     
-    fazerRequisicoesSequenciais();
-    //console.log(monsters)
-    //useMonstersStore.setState({ isLoading: false });
-  }, [idMonster]);
-  
-  
+    fetchMonsters();
+  }, [currentPage]);
+    
   //console.log("array:", useMonstersStore.getState().idMonster)
   if(isLoading) {
     return <div className="flex flex-col justify-center items-center h-[535px] ">
@@ -92,17 +67,17 @@ export async function MonstersCard(props: MonsterProps) {
       
       <div className='w-full flex flex-col overflow-x-hidden '>
 
-        {monsters.map((monster: MonsterProps) => (
+        {useMonstersStore.getState().monsters.map((monster: MonsterProps) => (
           
-          <Card className=' animate-fade duration-500 ease-in-out w-full mt-1 py-2 md:py-0' key={monster.monster_id}>
+          <Card className=' animate-fade duration-500 ease-in-out w-full mt-1 py-2 md:py-0' key={monster.id}>
             <CardContent className=" w-full">
               <a className="cursor-pointer" onClick={() => id_route.push(`/monsters/${monster.monster_id}`)}>
                 <div className='flex items-center w-full h-[50px] mt-6 '>
 
-                  <img className=" ml-0 md:ml-4 w-[50px] h-[50px] " width={100} height={100} src={`https://static.ragnaplace.com/db/npc/gif/${monster.monster_id}.gif`} alt="Monster Image" />
+                  <img className=" ml-0 md:ml-4 w-[50px] h-[50px] " width={100} height={100} src={`https://legacymmo.com.br/data/monsters/${monster.monster_id}.gif`} alt="Monster Image" />
 
                   <div className='pl-2 md:pl-0 ml-4 md:ml-8 w-[80px] md:w-[300px]'>
-                    <span className=' text-sm text-gray-300 font-semibold capitalize'>{monster.monster_info.replace(/_/g, ' ')}</span>
+                    <span className=' text-sm text-gray-300 font-semibold capitalize'>{monster.monster_info?.replace(/_/g, ' ')}</span>
                     <p className='text-xs text-muted-foreground' > <span className="text-xs font-semibold text-muted-foreground">ID</span> #{monster.monster_id} </p>
                   </div>
                   <section className="w-[100px] md:w-[72%] flex justify-end">

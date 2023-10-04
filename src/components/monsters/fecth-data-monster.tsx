@@ -14,21 +14,22 @@ export async function GetMonsterDetailsData(id: number) {
     }
 }
 
-export async function GetMonstersDataReq(monster_id: number) {
+export async function GetMonstersDataReq(page: number, pageSize: number) {
 
     
 
     const serial = '4f2d4effd149e5789c2a905291d7b651'
     const API_URL = `https://www.divine-pride.net/api/database/monster`;
     const API_URL2 = `https://ragnapi.com/api/v1/re-newal/monsters`
+    const API_URL3 = `http://localhost:5700/api/monsters?page=${page}&pageSize=${pageSize}`
 
     //const res = await fetch(`${API_URL}/${monster_id}/?apiKey=${serial}`, {  cache: 'force-cache' });
-    const res = await fetch(`/api/${monster_id}`, { cache: 'force-cache' });
+    const res = await fetch(API_URL3, { cache: 'force-cache' });
     //ItemList()
     try {
         const data = await res.json();
         //useMonstersStore.setState({ monsters: [...monsters, data] })
-        console.log(data)
+        //console.log(data)
 
         return data
 
@@ -36,15 +37,7 @@ export async function GetMonstersDataReq(monster_id: number) {
         
         // Ocorreu um erro ao fazer o parse do JSON (não é JSON válido)
         return (
-            {
-                monster_info: 'unknown',
-                monster_id: monster_id,
-                gif: '/assets/unk_item.png',
-                main_stats: {
-                    level: 0
-
-                }
-            }
+            console.log('Ocorreu um erro ao fazer o parse do JSON (não é JSON válido)')
         ) //}; // Ou você pode retornar um valor padrão, como um objeto vazio: return {};
     }
     
