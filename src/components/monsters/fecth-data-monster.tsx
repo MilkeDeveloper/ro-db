@@ -22,7 +22,7 @@ export async function GetMonstersDataReq(page: number, pageSize: number) {
     const API_URL = `https://www.divine-pride.net/api/database/monster`;
     const API_URL2 = `https://ragnapi.com/api/v1/re-newal/monsters`
     const API_URL3 = `http://localhost:5700/api/monsters?page=${page}&pageSize=${pageSize}`
-    const API_URL_TEST = `https://dfad-2804-28c8-513-9700-4c0-9096-b2bb-2cab.ngrok-free.app/api/monsters?page=${page}&pageSize=${pageSize}`
+    const API_URL_TEST = `https://ro-db-api.onrender.com/api/monsters?page=${page}&pageSize=${pageSize}`
 
     //const res = await fetch(`${API_URL}/${monster_id}/?apiKey=${serial}`, {  cache: 'force-cache' });
     const res = await fetch(API_URL_TEST, { cache: 'force-cache' });
@@ -31,9 +31,7 @@ export async function GetMonstersDataReq(page: number, pageSize: number) {
         const data = await res.json();
         //useMonstersStore.setState({ monsters: [...monsters, data] })
         //console.log(data)
-        if(data) {
-            return data
-        }
+        return data;
         
 
     } catch (error) {

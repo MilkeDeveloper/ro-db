@@ -20,8 +20,8 @@ interface MonstersStoreState {
 export const useMonstersStore = create<MonstersStoreState>((set) => ({
     monsters: [],
     newMonsters: [],
-    currentPage: 1,
-    pageSize: 15,
+    currentPage: 15,
+    pageSize: 5,
     nextPage: () => set((state) => ({ currentPage: state.currentPage + 1 })),
     previousPage: () => set((state) => ({ currentPage: state.currentPage - 1 })),
     idMonster: 1001,
