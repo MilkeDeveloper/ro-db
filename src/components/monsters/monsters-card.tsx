@@ -67,7 +67,7 @@ export async function MonstersCard(props: MonsterProps) {
       
       <div className='w-full flex flex-col overflow-x-hidden '>
 
-        {useMonstersStore.getState().monsters.map((monster: MonsterProps) => (
+        {useMonstersStore.getState().monsters?.map((monster: MonsterProps) => (
           
           <Card className=' animate-fade duration-500 ease-in-out w-full mt-1 py-2 md:py-0' key={monster.id}>
             <CardContent className=" w-full">
