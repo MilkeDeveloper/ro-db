@@ -1,7 +1,4 @@
 
-import { useMonstersStore } from "@/app/store/monstersStore";
-import NextCors from 'nextjs-cors';
-
 
 export async function GetMonsterDetailsData(id: number) {
     const serial = '4f2d4effd149e5789c2a905291d7b651'

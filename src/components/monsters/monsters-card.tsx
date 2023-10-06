@@ -39,37 +39,30 @@ export async function MonstersCard(props: MonsterProps) {
 
   console.log(useMonstersStore.getState().currentPage)
 
-
-
-  if (searchTerm === '') {
-
-    useEffect(() => {
+  useEffect(() => {
+    if (searchTerm === '') {
       const fetchMonsters = async () => {
 
         try {
           useMonstersStore.setState({ isLoading: true });
           const data = await GetMonstersDataReq(currentPage, pageSize);
           monsterList.push(useMonstersStore.setState({ filteredMonsters: data }));
-
+  
           return data
         } catch (error) {
           console.error("Error fetching monsters:", error);
         } finally {
           useMonstersStore.setState({ isLoading: false });
         }
-
-
+  
+        
       };
-
+    
       fetchMonsters();
-    }, [currentPage]);
+    } else {
 
-  } else {
-    //useMonstersStore.setState({ filteredMonsters: filteredMonstersList })
-
-    const paginatedList: any = []
-
-    useEffect(() => {
+      const paginatedList: any = []
+      //useMonstersStore.setState({ filteredMonsters: filteredMonstersList })
       const fetchAllMonsters = async () => {
         try {
           // Lógica para buscar monstros da API e definir a lista de monstros
@@ -115,13 +108,15 @@ export async function MonstersCard(props: MonsterProps) {
       return () => {
         clearTimeout(timeout);
       };
-      //filterMonsters(useMonstersStore.getState().searchTerm);
+  
       
-      //useMonstersStore.setState({ isLoading: false });
-    }, [useMonstersStore.getState().searchTerm, currentPage]);
+  
+  
+    }
+    
 
-
-  }
+    
+  }, [currentPage, useMonstersStore.getState().searchTerm, currentPage]);
 
 
 
