@@ -20,7 +20,7 @@ export default function Head() {
             <nav className=' flex justify-center bg-[#06070d]'>
 
                 <div className=' gap-4 mt-4 rounded-xl w-[90%] border-blue-950 bg-[#11131b] py-4 flex justify-center items-center'>
-                    <a className='cursor-pointer text-sm font-normal text-white' onClick={() => router.push('/#')} >SKILLS</a>
+                    <a className='cursor-pointer text-sm font-normal text-white' onClick={() => router.push('/skills')} >SKILLS</a>
                     <Separator orientation='vertical' className='h-6' />
                     <a className='cursor-pointer ml-0 text-sm font-normal text-white' onClick={() => router.push('/monsters')} >MONSTERS</a>
                     <Separator orientation='vertical' className='h-6' />

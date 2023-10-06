@@ -17,6 +17,7 @@ interface MonstersStoreState {
     setMonsters: (monsters: MonsterProps[]) => void;
     searchTerm: string
     filteredMonsters: MonsterProps[]
+    isKeyDown: boolean
     //maxPage: number
 }
 
@@ -35,6 +36,7 @@ export const useMonstersStore = create<MonstersStoreState>((set) => ({
     setMonsters: (monsters) => set({ monsters }),
     searchTerm: '',
     filteredMonsters: [],
+    isKeyDown: false,
     //maxPage: useMonstersStore.getState().filteredMonsters.length / useMonstersStore.getState().pageSize
 }
 ));

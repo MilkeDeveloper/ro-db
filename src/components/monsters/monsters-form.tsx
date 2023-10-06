@@ -13,15 +13,24 @@ export function MonsterForm() {
     const term = e.target.value;
     useMonstersStore.setState({ searchTerm: term });
     useMonstersStore.setState({ currentPage: 1 });
+    useMonstersStore.setState({ isKeyDown: false });
   }  
+
+  const handleSearch = (e: any) => {
+    if (e.key === 'Enter') {
+      const term = e.target.value;
+      useMonstersStore.setState({ searchTerm: term });
+      useMonstersStore.setState({ isKeyDown: true });
+    }
+  }
     console.log(useMonstersStore.getState().searchTerm)
 
     return (
-        <form action="" className='w-full'>
+        <form onSubmit={(e) => e.preventDefault()} action="" className='w-full'>
             <h1 className='font-semibold'>Lista de Monstros</h1>
             <div className='w-full pt-6 flex justify-center gap-4 items-center '>
               
-              <Input onChange={handleInputChange} type='text' value={searchTerm} className='w-full md:w-[280px] text-sm ' placeholder='Buscar monstro' />
+              <Input onKeyDown={handleSearch} onChange={ handleInputChange } type='text' value={searchTerm} className='w-full md:w-[280px] text-sm ' placeholder='Buscar monstro' />
               <Search className='w-6 h-6' />
               
             </div>

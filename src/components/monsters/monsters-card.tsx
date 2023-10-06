@@ -29,7 +29,7 @@ const monsterList: any = []
 export async function MonstersCard(props: MonsterProps) {
 
   const id_route = useRouter();
-  const { pageSize, currentPage, isLoading, searchTerm, monsters } = useMonstersStore();
+  const { pageSize, currentPage, isLoading, searchTerm, monsters, isKeyDown } = useMonstersStore();
   //const data = await getItemsData(item_id)
 
 
@@ -40,7 +40,7 @@ export async function MonstersCard(props: MonsterProps) {
   console.log(useMonstersStore.getState().currentPage)
 
   useEffect(() => {
-    if (searchTerm === '') {
+    if (useMonstersStore.getState().isKeyDown === false || searchTerm === '') {
       const fetchMonsters = async () => {
 
         try {
@@ -107,6 +107,7 @@ export async function MonstersCard(props: MonsterProps) {
       // Filtra os monstros sempre que o searchTerm é alterado
       return () => {
         clearTimeout(timeout);
+        
       };
   
       
@@ -116,7 +117,7 @@ export async function MonstersCard(props: MonsterProps) {
     
 
     
-  }, [currentPage, useMonstersStore.getState().searchTerm, currentPage]);
+  }, [currentPage, useMonstersStore.getState().isKeyDown, currentPage]);
 
 
 
