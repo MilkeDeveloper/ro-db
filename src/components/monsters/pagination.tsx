@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function Pagination() {
     const { isLoading, currentPage, previousPage, nextPage, nextMonsterList, previousMonsterList } = useMonstersStore();
-    if(!isLoading)
+    if(!isLoading && useMonstersStore.getState().filteredMonsters.length > 0)
     
         return (
             <div className={` w-full items-end flex justify-between }`} >
@@ -14,7 +14,7 @@ export function Pagination() {
                     <ChevronLeft className="text-cyan-500" /> 
                 </button>
                 <span className="text-cyan-500 font-semibold">{useMonstersStore.getState().currentPage}</span>
-                <button className={`${currentPage >= 70 ? 'opacity-50' : ''}`} disabled={currentPage >= 70} onClick={ () =>{ nextPage();
+                <button className={`${currentPage >= 70 || useMonstersStore.getState().filteredMonsters.length < 15 ? 'opacity-50' : ''}`} disabled={currentPage >= 70 || useMonstersStore.getState().filteredMonsters.length < 15 } onClick={ () =>{ nextPage();
                     {currentPage <= 0  ? '' : nextMonsterList() } } } > 
                 
                     <ChevronRight className="text-cyan-500" /> 

@@ -21,7 +21,7 @@ module.exports = {
       return [
         {
           source: '/api/:path*',
-          destination: 'https://ragnapi.com/api/v1/re-newal/monsters/:path*'
+          destination: 'http://ro-db-api.onrender.com/api/:path*'
         }
       ]
     }

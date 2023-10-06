@@ -1,16 +1,27 @@
+'use client'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select";
 import { Separator } from "../ui/separator";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
+import { useMonstersStore } from "@/app/store/monstersStore";
 
 
 export function MonsterForm() {
+
+  const { searchTerm } = useMonstersStore();
+  const handleInputChange = (e: any) => {
+    const term = e.target.value;
+    useMonstersStore.setState({ searchTerm: term });
+    useMonstersStore.setState({ currentPage: 1 });
+  }  
+    console.log(useMonstersStore.getState().searchTerm)
+
     return (
         <form action="" className='w-full'>
             <h1 className='font-semibold'>Lista de Monstros</h1>
             <div className='w-full pt-6 flex justify-center gap-4 items-center '>
               
-              <Input className='w-full md:w-[280px] text-sm ' type='text' placeholder='Buscar monstro' />
+              <Input onChange={handleInputChange} type='text' value={searchTerm} className='w-full md:w-[280px] text-sm ' placeholder='Buscar monstro' />
               <Search className='w-6 h-6' />
               
             </div>
