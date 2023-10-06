@@ -21,6 +21,7 @@ export function MonsterForm() {
       const term = e.target.value;
       useMonstersStore.setState({ searchTerm: term });
       useMonstersStore.setState({ isKeyDown: true });
+      e.target.blur();
     }
   }
     console.log(useMonstersStore.getState().searchTerm)
