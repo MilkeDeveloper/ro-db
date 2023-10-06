@@ -40,7 +40,7 @@ export async function MonstersCard(props: MonsterProps) {
   console.log(useMonstersStore.getState().currentPage)
 
   useEffect(() => {
-    if (useMonstersStore.getState().isKeyDown === false || searchTerm === '') {
+    if ( searchTerm === '') {
       const fetchMonsters = async () => {
 
         try {
@@ -117,7 +117,7 @@ export async function MonstersCard(props: MonsterProps) {
     
 
     
-  }, [currentPage, useMonstersStore.getState().isKeyDown, currentPage]);
+  }, [currentPage, useMonstersStore.getState().isKeyDown, useMonstersStore.getState().searchTerm, currentPage]);
 
 
 
